@@ -29,5 +29,6 @@ public class P2InstanciaEstudiante {
         System.out.println("Nombre: " + nn.getNombre());
         System.out.println("Apellido: " + nn.getApellido());
         System.out.println("Promedio: " + nn.getPromedio());
+
     }
 }
