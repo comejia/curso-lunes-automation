@@ -19,6 +19,8 @@ public class BaseTest {
         options.addArguments("start-maximized");
         options.addArguments("incognito");
 
+//        options.addArguments("headless");
+
         options.setPageLoadTimeout(Duration.ofSeconds(60));
 
         System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/drivers/chromedriver.exe");

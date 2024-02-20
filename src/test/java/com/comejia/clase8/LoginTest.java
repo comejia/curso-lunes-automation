@@ -1,7 +1,8 @@
 package com.comejia.clase8;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
+import com.comejia.pages.HomePage;
+import com.comejia.pages.LoginPage;
+import com.comejia.pages.MyAccountPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -9,37 +10,47 @@ public class LoginTest extends BaseTest {
 
     @Test
     public void loginTest() {
+        HomePage homePage = new HomePage(getDriver());
+        LoginPage loginPage = new LoginPage(getDriver());
+        MyAccountPage myAccountPage = new MyAccountPage(getDriver());
+
         // Paso 1: levantar la pagina
         getDriver().get("https://opencart.abstracta.us/");
 
         // Paso 2: click en My Account
-        By myAccountBy = By.xpath("//a[@title=\"My Account\"]");
-        WebElement myAccountEl = getDriver().findElement(myAccountBy);
-        myAccountEl.click();
+        homePage.clickMyAccount();
 
         // Paso 3: click en Login del dropdown
-        By loginBy = By.xpath("//a[text()=\"Login\"]");
-        WebElement loginEl = getDriver().findElement(loginBy);
-        loginEl.click();
+        homePage.clickLoginDropdown();
 
         // Paso 4: hacer login (ingresar user, pass y click en boton login)
-        By inputEmailBy = By.id("input-email");
-        By inputPassBy = By.id("input-password");
-        By buttonLoginBy = By.xpath("//input[@value=\"Login\"]");
-
-        WebElement inputEmailEl = getDriver().findElement(inputEmailBy);
-        WebElement inputPassEl = getDriver().findElement(inputPassBy);
-        WebElement buttonLoginEl = getDriver().findElement(buttonLoginBy);
-
-        inputEmailEl.sendKeys("cursolunes@gmail.com");
-        inputPassEl.sendKeys("cursolunes");
-        buttonLoginEl.click();
+//        loginPage.setEmail("cursolunes@gmail.com");
+//        loginPage.setPassword("cursolunes");
+//        loginPage.clickLogin();
+        loginPage.login("cursolunes@gmail.com", "cursolunes");
 
         // Paso 5: validaciones
-        By titleBy = By.xpath("//h2[text()=\"My Account\"]");
-        WebElement titleEl = getDriver().findElement(titleBy);
-
-        Assert.assertTrue(titleEl.isDisplayed());
+        Assert.assertTrue(myAccountPage.titleIsDisplayed());
     }
 
+    @Test
+    public void loginInvalid() {
+        HomePage homePage = new HomePage(getDriver());
+        LoginPage loginPage = new LoginPage(getDriver());
+
+        // Paso 1: levantar la pagina
+        getDriver().get("https://opencart.abstracta.us/");
+
+        // Paso 2: click en My Account
+        homePage.clickMyAccount();
+
+        // Paso 3: click en Login del dropdown
+        homePage.clickLoginDropdown();
+
+        // Paso 4: hacer login (ingresar user, pass y click en boton login)
+        loginPage.login("cursolunes2222@gmail.com", "cursolunes");
+
+        // Paso 5: validaciones
+        Assert.assertTrue(loginPage.credentialsErrorIsDisplayed());
+    }
 }

@@ -1,5 +1,6 @@
 package com.comejia.clase8;
 
+import com.comejia.pages.HomePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -9,23 +10,15 @@ public class HomeTest extends BaseTest {
 
     @Test
     public void validarHome() {
+        HomePage homePage = new HomePage(getDriver());
+
         // Paso 1: levantar la pagina
         getDriver().get("https://opencart.abstracta.us/");
 
         // Paso 2: realizar las aserciones
-        By inputBy = By.name("search");
-        By carrouselBy = By.id("content");
-        By menuBy = By.id("menu");
-        By myAccountBy = By.xpath("//a[@title=\"My Account\"]");
-
-        WebElement inputEl = getDriver().findElement(inputBy);
-        WebElement carrouselEl = getDriver().findElement(carrouselBy);
-        WebElement menuEl = getDriver().findElement(menuBy);
-        WebElement myAccountEl = getDriver().findElement(myAccountBy);
-
-        Assert.assertTrue(inputEl.isDisplayed(), "No se visualizo el input");
-        Assert.assertTrue(carrouselEl.isDisplayed());
-        Assert.assertTrue(menuEl.isDisplayed());
-        Assert.assertTrue(myAccountEl.isDisplayed());
+        Assert.assertTrue(homePage.inputIsDisplayed());
+        Assert.assertTrue(homePage.carrouselIsDisplayed());
+        Assert.assertTrue(homePage.menuIsDisplayed());
+        Assert.assertTrue(homePage.myAccountIsDisplayed());
     }
 }
