@@ -3,6 +3,7 @@
 
 Característica: Login
 
+  @TEST-1234
   Escenario: Login válido
     Dado que el usuario ingresa a la página de login
     Cuando el usuario se loguea con credenciales validas
