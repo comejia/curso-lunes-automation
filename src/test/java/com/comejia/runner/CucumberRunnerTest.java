@@ -8,7 +8,7 @@ import io.cucumber.testng.CucumberOptions;
         features = "src/test/resources/features",
         glue = {"com.comejia.stepDefinitions", "com.comejia.hooks"},
         snippets = CucumberOptions.SnippetType.CAMELCASE,
-        tags = "@FAV-123"
+        tags = "@TEST-1234"
 )
 public class CucumberRunnerTest extends AbstractTestNGCucumberTests {
 
